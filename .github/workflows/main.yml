@@ -33,7 +33,8 @@ jobs:
       # Compile and Publish  
       #- name: Build App For Release
       #  run: msbuild ActionDemo_NetFrameWork/ActionDemo_NetFrameWork.sln /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\"
-        
+      - name: Make Folder
+        run: md D:\published
       - name: Upload Artifact
         uses: actions/upload-artifact@v1.0.0
         with:
