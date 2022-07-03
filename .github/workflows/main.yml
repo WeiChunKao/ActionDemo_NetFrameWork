@@ -22,6 +22,8 @@ jobs:
       # restore with NuGet  
       - name: Restore NuGet Packages
         run: nuget restore ActionDemo_NetFrameWork.sln
+      - name: Install NUnit
+        run: Install-Package nunit -Version 3.5.0
       
       # Compile  
       - name: Build App
