@@ -33,7 +33,7 @@ jobs:
         run: msbuild ActionDemo_NetFrameWork.csproj /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFFolder /p:_PackageTempDir="\published\"
         
       - name: Upload Artifact
-        uses: actions/upload-artifact@V1.0.0
+        uses: actions/upload-artifact@v1.0.0
         with:
           name: published_webapp
           path: \published\
