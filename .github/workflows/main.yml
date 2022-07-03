@@ -22,14 +22,11 @@ jobs:
       # restore with NuGet  
       - name: Restore NuGet Packages
         run: nuget restore ActionDemo_NetFrameWork.sln
-      - name: Install NUnit
-        run: Install-Package nunit -version 3.5.0
-      
       # Compile  
       - name: Build App
         run: msbuild ActionDemo_NetFrameWork.sln
       - name: Run UnitTests
-        run: nunit3-console.exe ActionDemo_NetFrameWork/ActionDemo_NetFrameWorkTest/bin/Debug/net472/ActionDemo_NetFrameWorkTest.dll
+        run: dotnet test ActionDemo_NetFrameWork/ActionDemo_NetFrameWorkTest/bin/Debug/net472/ActionDemo_NetFrameWorkTest.dll
       # Compile and Publish  
       - name: Build App For Release
         run: msbuild ActionDemo_NetFrameWork.csproj /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFFolder /p:_PackageTempDir="\published\"
