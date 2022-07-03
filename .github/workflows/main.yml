@@ -1,0 +1,41 @@
+name: .NET
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  workflow_dispatch:
+jobs:
+  build:
+    # windows as Runner
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      # install MSBuild、Nuget
+      - name: Setup msbuild
+        uses: microsoft/setup-msbuild@v1.1
+      - name: Setup Nuget.exe for use with actions
+        uses: Nuget/setup-nuget@v1.0.5
+        
+      # restore with NuGet  
+      - name: Restore NuGet Packages
+        run: nuget restore ActionDemo_NetFrameWork.sln
+      
+      # Compile  
+      - name: Build App
+        run: msbuild ActionDemo_NetFrameWork.sln
+      - name: Run UnitTests
+        run: nunit3-console.exe ActionDemo_NetFrameWork/ActionDemo_NetFrameWorkTest/bin/Debug/net472/ActionDemo_NetFrameWorkTest.dll
+      # Compile and Publish  
+      - name: Build App For Release
+        run: msbuild ActionDemo_NetFrameWork.csproj /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFFolder /p:_PackageTempDir="\published\"
+        
+      - name: Upload Artifact
+        uses: actions/upload-artifact@V1.0.0
+        with:
+          name: published_webapp
+          path: \published\
+        
+        
