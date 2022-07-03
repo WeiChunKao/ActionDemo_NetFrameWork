@@ -23,7 +23,7 @@ jobs:
       - name: Restore NuGet Packages
         run: nuget restore ActionDemo_NetFrameWork.sln
       - name: Install NUnit
-        run: Install-Package nunit -Version 3.5.0
+        run: Install-Package nunit -version 3.5.0
       
       # Compile  
       - name: Build App
