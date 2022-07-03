@@ -25,8 +25,11 @@ jobs:
       # Compile  
       - name: Build App
         run: msbuild ActionDemo_NetFrameWork.sln
+      - name: Install NUnit.ConsoleRunner
+        run: nuget install NUnit.ConsoleRunner -Version 3.13.0 -DirectDownload -OutputDirectory .
       - name: Run UnitTests
-        run: dotnet test ActionDemo_NetFrameWork/ActionDemo_NetFrameWorkTest/bin/Debug/net472/ActionDemo_NetFrameWorkTest.dll
+        run: ./NUnit.ConsoleRunner.3.13.0/tools/nunit3-console.exe ActionDemo_NetFrameWork/ActionDemo_NetFrameWorkTest/bin/Debug/net472/ActionDemo_NetFrameWorkTest.dll
+      
       # Compile and Publish  
       - name: Build App For Release
         run: msbuild ActionDemo_NetFrameWork.csproj /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFFolder /p:_PackageTempDir="\published\"
