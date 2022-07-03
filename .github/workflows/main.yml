@@ -31,8 +31,8 @@ jobs:
         run: ./NUnit.ConsoleRunner.3.13.0/tools/nunit3-console.exe ActionDemo_NetFrameWorkTest/bin/Debug/net472/ActionDemo_NetFrameWorkTest.dll
       
       # Compile and Publish  
-      - name: Build App For Release
-        run: msbuild ActionDemo_NetFrameWork/ActionDemo_NetFrameWork.sln /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\"
+      #- name: Build App For Release
+      #  run: msbuild ActionDemo_NetFrameWork/ActionDemo_NetFrameWork.sln /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\"
         
       - name: Upload Artifact
         uses: actions/upload-artifact@v1.0.0
