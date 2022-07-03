@@ -37,6 +37,6 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: published_webapp
-          path: .\published\*
+          path: published
         
         
