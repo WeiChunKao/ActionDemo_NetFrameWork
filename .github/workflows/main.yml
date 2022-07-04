@@ -32,7 +32,8 @@ jobs:
       
       # Compile and Publish  
       - name: Build App For Release
-        run: msbuild ActionDemo_NetFrameWork.sln;ActionDemo_NetFrameWorkTest/ActionDemo_NetFrameWorkTest.csproj /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\" /p:Configuration=Release 
+        #run: msbuild ActionDemo_NetFrameWork.sln;ActionDemo_NetFrameWorkTest/ActionDemo_NetFrameWorkTest.csproj /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\" /p:Configuration=Release 
+        run: msbuild ActionDemo_NetFrameWork.sln /nologo /verbosity:m /t:Build  /p:_PackageTempDir="\published\" /p:Configuration=Release 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
