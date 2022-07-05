@@ -30,14 +30,13 @@ jobs:
       - name: Run UnitTests
         run: ./NUnit.ConsoleRunner.3.13.0/tools/nunit3-console.exe ActionDemo_NetFrameWorkTest/bin/Debug/net472/ActionDemo_NetFrameWorkTest.dll
       
-      # Compile and Publish  
       - name: Build App For Release
-        #run: msbuild ActionDemo_NetFrameWork.sln;ActionDemo_NetFrameWorkTest/ActionDemo_NetFrameWorkTest.csproj /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\" /p:Configuration=Release 
-        run: msbuild ActionDemo_NetFrameWork.sln /nologo /verbosity:m /t:Build  /p:OutputPathBaseDir="published" /p:Configuration=Release 
+        run: msbuild ActionDemo_NetFrameWork\ActionDemo_NetFrameWork.csproj /nologo /t:Build /p:Configuration=Release /p:DeployOnBuild=True /p:PackageAsSingleFile=True /p:PackageLocation=publish\ActionDemo_NetFrameWork.zip
       - name: Upload Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
-          name: published_webapp
-          path: "published"
+          name: drop
+          path: ActionDemo_NetFrameWork\publish\*
+          if-no-files-found: error
         
         
